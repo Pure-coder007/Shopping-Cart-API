@@ -16,9 +16,27 @@ REQUEST
 ```
 
 RESPONSE
-``json 
+```json 
 {
-    "message": "User registered successfully"
+    "message": "User registered successfully",
+    "Info" : "Please verify your account with the OTP sent to your email",
+    "status": 201
+}
+```
+POST (Verify Otp) /api/verify_otp/<email>
+
+
+REQUEST
+```json 
+{
+    "otp": "7854"
+}
+```
+RESPONSE
+```json
+{
+    "message": "OTP verified successfully",
+    "status": 200
 }
 ```
 
@@ -43,12 +61,12 @@ RESPONSE
 }
 ```
 
-To login with your key,
+To login with your access_token in the Authorization holder in the bearer token section,
 
 ```sh
-Token <key>
+<access_token>
 ```
-`
+
 <!-- To add an item to cart -->
 POST api/insert 
 @jwt_required()
@@ -133,11 +151,11 @@ json
 }
 
 
-POST (Verifying OTP) api/verify_otp/<string:email>/
-@jwt_required
-RESPONSE
-json
+// POST (Verifying OTP) api/verify_otp/<string:email>/
+// @jwt_required
+// RESPONSE
+// json
 
-{
-    "message": "OTP verified successfully"
-}
+// {
+//     "message": "OTP verified successfully"
+// }

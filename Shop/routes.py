@@ -32,6 +32,14 @@ OTP = random.randint(1000, 9999)
 #     })
 
 
+def send_otp(email):
+    msg = Message('Verification Token', sender='Anonymous@gmail.com', recipients=[email])
+    msg.body = f'Your verification token is: {OTP}'
+    mail.send(msg)
+
+
+
+
 # Creating the add-item route
 @api_blue.route('/insert', methods=['POST'])
 @jwt_required()
@@ -145,8 +153,10 @@ def register():
     user = User(username=username, email=email, password=hashed_password)
     db.session.add(user)
     db.session.commit()
+    send_otp(email)
     return jsonify({
         "message": "User registered successfully",
+        "Info" : "Please verify your account with the OTP sent to your email",
         "status": 201
     })
 
@@ -174,6 +184,12 @@ def login():
     if not user:
         return jsonify({
             "message": "Username not found",
+            "status": 400
+        })
+    if not user.is_verified:
+        send_otp(user.email)
+        return jsonify({
+            "message": "Please verify your account with the OTP sent to your mail",
             "status": 400
         })
     if not bcrypt.check_password_hash(user.password, password):
@@ -318,39 +334,39 @@ def view_user_items(user_id):
 
 
 # Creating the verify OTP for registering users
-@api_blue.route('/verify_otp/<string:email>/', methods=['GET', 'POST'])
-@jwt_required()
+@api_blue.route('/verify_otp/<string:email>/', methods=['POST'])
+# @jwt_required()
 def verify_otp(email):
-    if request.method == 'POST':
-        otp = request.form.get('otp')
-        if otp is None:
+    data = request.get_json()
+    otp = data['otp']
+    if not otp:
+        return jsonify({
+            "message": "OTP not provided",
+            "status": 400
+        }), 400
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({
+            "message": "User not found",
+            "status": 404
+        }), 404
+
+    try:
+        if int(otp) != OTP:
             return jsonify({
-                "message": "OTP not provided",
+                "message": "Incorrect OTP",
                 "status": 400
             }), 400
-
-        user = User.query.filter_by(email=email).first()
-
-        try:
-            if int(otp) != OTP:
-                return jsonify({
-                    "message": "Incorrect OTP",
-                    "status": 400
-                }), 400
-        except ValueError:
-            return jsonify({
-                "message": "Invalid OTP format",
-                "status": 400
-            }), 400
-
-        user.is_verified = True
-        db.session.commit()
+    except ValueError:
         return jsonify({
-            "message": "OTP verified successfully",
-            "status": 200
-        }), 200
-    else:
-        return jsonify({
-            "message": "Only POST method is allowed",
-            "status": 405
-        }), 405
+            "message": "Invalid OTP format",
+            "status": 400
+        }), 400
+
+    user.is_verified = True
+    db.session.commit()
+    return jsonify({
+        "message": "OTP verified successfully",
+        "status": 200
+    }), 200
