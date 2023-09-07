@@ -28,6 +28,7 @@ Flask-MySQL
 Flask-MySQLdb
 Flask-RESTful
 Flask-SQLAlchemy
+Flask-jwt-extended
 Flask-WTF
 greenlet
 gunicorn
