@@ -20,6 +20,7 @@ dnspython
 drf-spectacular
 email-validator
 filelock
+Flask-cors
 Flask
 Flask-Bcrypt
 Flask-JWT-Extended
