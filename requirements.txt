@@ -22,13 +22,13 @@ email-validator
 filelock
 Flask
 Flask-Bcrypt
+Flask-JWT-Extended
 Flask-Login
 Flask-Mail
 Flask-MySQL
 Flask-MySQLdb
 Flask-RESTful
 Flask-SQLAlchemy
-Flask-jwt-extended
 Flask-WTF
 greenlet
 gunicorn
@@ -62,7 +62,7 @@ PyYAML
 referencing
 requests
 requests-oauthlib
-# rpds-py
+rpds-py
 six
 SQLAlchemy
 sqlparse
