@@ -121,35 +121,35 @@ RESPONSE
   {
     "message" : "Items retreived successfully"
   }
-
+```
 
 GET (Showing users) api/admin_users
 @jwt_required
 
 RESPONSE
-json
+```json
 {
     "message": "Users retreived successfully"
 }
-
+```
 
 DELETE (Deleting users)   api/admin/delete_user/<int:user_id>
 @jwt_required
 RESPONSE
-json
+```json
 {
     "message": "User deleted successfully"
 }
-
+```
 
 GET (Displaying user added items)  api/admin/view_user_items/<int:user_id>
 @jwt_required
 RESPONSE
-json
+```json
 {
     "message" : "Items retreived successfully"
 }
-
+```
 
 // POST (Verifying OTP) api/verify_otp/<string:email>/
 // @jwt_required
