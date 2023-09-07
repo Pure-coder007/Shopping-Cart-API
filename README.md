@@ -151,11 +151,11 @@ RESPONSE
 }
 ```
 
-// POST (Verifying OTP) api/verify_otp/<string:email>/
+<!-- // POST (Verifying OTP) api/verify_otp/<string:email>/
 // @jwt_required
 // RESPONSE
 // json
 
 // {
 //     "message": "OTP verified successfully"
-// }
+// } -->
