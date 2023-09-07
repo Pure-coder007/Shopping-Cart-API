@@ -12,7 +12,7 @@ from flask_cors import CORS
 
 def create_app():
   app = Flask(__name__)
-  
+  CORS(app)
   
 
   app.config['SECRET_KEY'] = '2d8926762ccbac889d55b32635333a91'
