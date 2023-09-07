@@ -13,7 +13,12 @@ REQUEST
   "password1": "string",
   "email": "string@string.com"
 }
-```
+
+RESPONSE
+``json 
+{
+    "message": "User registered successfully"
+}
 
 POST (Login) /api/login
 
