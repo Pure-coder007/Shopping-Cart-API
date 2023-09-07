@@ -13,12 +13,14 @@ REQUEST
   "password1": "string",
   "email": "string@string.com"
 }
+```
 
 RESPONSE
 ``json 
 {
     "message": "User registered successfully"
 }
+```
 
 POST (Login) /api/login
 
@@ -26,15 +28,19 @@ POST (Login) /api/login
 REQUEST
 ```json
 {
-  "email": "user@example.com", 
-  "password": "string"
+    "username": "Admin",
+    "email" : "admin_email",
+    "password": "pass"
 }
 ```
 RESPONSE
 ```json
   {
-    "key": "eyJhbGciOiJIUzIEyM...................",
-  }
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..............................",
+    "message": "Login successful",
+    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9........................",
+    "status": 200
+}
 ```
 
 To login with your key,
