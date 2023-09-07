@@ -4,7 +4,7 @@
 
 POST (Register) /api/register
 
-To get registered as an admin, make sure the is_admin variable is set to True else you'll be regiatered as a user
+<!-- To get registered as an admin, make sure the is_admin variable is set to True else you'll be regiatered as a user -->
 
 REQUEST
 ```json
